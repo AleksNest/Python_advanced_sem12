@@ -47,9 +47,7 @@ class Student:
         with open(lessons_file, 'r', encoding='utf-8') as csv_file:
             reader = csv.reader(csv_file)
             for row in reader:
-                self._lessons["lessons"][row[0]] = {"assessments": [],
-                                            "test_results": [],
-                                             "average_test": None}
+                self._lessons["lessons"][row[0]] = {"assessments": [], "test_results": [], "average_test": None}
         self._lessons["middle_assessment"] = None
         self._lessons["middle_test"] = None
 
@@ -67,10 +65,9 @@ class Student:
             if number < 0 or number > 100:
                 raise ValueError("Оценка должна быть от 0 до 100")
             self.lessons["lessons"][lesson]["test_results"].append(number)
-            self.lessons["lessons"][lesson]["average_test"] = reduce(lambda x, y: x + y,
-                                                                     self.lessons["lessons"][lesson][
-                                                                         "test_results"]) / len(
-                self.lessons["lessons"][lesson]["test_results"])  # средний бал по тестам по каждому предмету
+
+            # средний бал по тестам по каждому предмету:
+            self.lessons["lessons"][lesson]["average_test"] = reduce(lambda x, y: x + y, self.lessons["lessons"][lesson]["test_results"]) / len(self.lessons["lessons"][lesson]["test_results"])
             self.lessons['middle_test'] = self.calculate_middle_test(self.lessons)
 
     @staticmethod
